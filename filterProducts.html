@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        main{
+            width: 100vw;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;   
+        }
+        .main-container{
+            /* background-color: aqua; */
+            display: flex;
+            width: 90%;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            row-gap: 15px;  
+        }
+        .each-item{
+            border: 2px solid red;
+            width: 30%;
+            height: 300px;
+         
+        }
+        img{
+            height: 60%;
+            width: 100%;
+        }
+        .price{
+            display: flex;
+            justify-content: space-around;
+            font-size: 20px;
+            font-weight: 700;
+            border-bottom: 2px solid green;
+            padding-bottom: 5px;
+        }
+        .price >p:first-child{
+            background-color: aqua;
+        }
+        .desc{
+            padding-bottom: 5px;
+            padding-top: 5px;
+
+            text-align: center;
+            font-size: 18px;
+            font-weight: 700;
+
+        }
+        h2{
+            height: 100px;
+            text-align: center;
+            font-size: 40px;
+        }
+        .filter-div{
+            display: flex;
+            justify-content: space-evenly;
+            width: 100vw;
+        }
+        .filter-div div{
+            height:30px;
+            width: 10vw;
+            border: 2px solid red;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h2 >my products</h2>
+    <div class="filter-div">
+        <div class="fil" id="fillid1">all</div>
+        <div class="fil" id="fillid2" data-val="medicine">medicine</div>
+        <div class="fil" id="fillid3" data-val="Beauty">beauty fashion</div>
+        <div class="fil" id="fillid4" data-val="sports">sports</div>
+        <div class="fil" id="fillid5" data-val="fashion"> womens fashion</div>
+        <div class="fil" id="fillid6" data-val="Electronis">electronics</div>
+    </div>
+    <main>
+        
+        <aside class="main-container">
+            <!-- indiv -->
+  
+        </aside>
+    </main>
+    
+    <button id="btn">click</button>
+    <script src="./filter.js"></script>
+</body>
+</html>
