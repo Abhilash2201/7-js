@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Data Collection</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.25/jspdf.plugin.autotable.min.js"></script>
+</head>
+<body>
+
+    <h1>User Data Collection</h1>
+
+    <form id="userDataForm">
+        <label for="username">Username:</label>
+        <input type="text" id="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required>
+
+        <label for="image">Image 1 Upload:</label>
+        <input type="file" id="image" accept="image/*" required>
+
+        <label for="image1">Image 2 Upload:</label>
+        <input type="file" id="image1" accept="image/*" required>
+
+        <button type="button" onclick="collectAndDownload()">Submit</button>
+    </form>
+
+    <script>
+        const { jsPDF } = window.jspdf;
+
+        function collectAndDownload() {
+            // Collect user data
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const imageInput = document.getElementById('image');
+            const imageInput1 = document.getElementById('image1');
+            const imageFile = imageInput.files[0];
+            const imageFile1 = imageInput1.files[0];
+
+            // Check if both images are selected
+            if (!imageFile || !imageFile1) {
+                alert('Please select both images.');
+                return;
+            }
+
+            // Create a jsPDF instance
+            const pdf = new jsPDF();
+
+            // Add user data to the PDF in a table format
+            const data = [
+                ['Username', 'Email'],
+                [username, email]
+            ];
+
+            pdf.autoTable({
+                head: data.slice(0, 1),
+                body: data.slice(1)
+            });
+
+            // Add the first image to the PDF
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const imageData = e.target.result;
+                pdf.addImage(imageData, 'JPEG', 10, pdf.autoTable.previous.finalY + 10, 50, 50);
+
+                // Add the second image to the PDF
+                const reader1 = new FileReader();
+                reader1.onload = function (e1) {
+                    const imageData1 = e1.target.result;
+                    pdf.addImage(imageData1, 'JPEG', 70, pdf.autoTable.previous.finalY + 10, 50, 50);
+
+                    // Save the PDF
+                    pdf.save('userData.pdf');
+                };
+                reader1.readAsDataURL(imageFile1);
+            };
+            reader.readAsDataURL(imageFile);
+        }
+    </script>
+
+</body>
+</html>
